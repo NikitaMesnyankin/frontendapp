@@ -48,6 +48,14 @@ export namespace Interfaces {
         activationStatus: boolean;
         activationLink: string;
     }
+
+    export interface UserRegistrationData {
+        login: string,
+        password: string,
+        email: string
+    }
+
+    export type UserLoginData = Exclude<UserRegistrationData, "login">;
 }
 
 export namespace Enums {
