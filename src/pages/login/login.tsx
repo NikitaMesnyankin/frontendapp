@@ -3,40 +3,40 @@ import { useForm } from "react-hook-form";
 
 import {StyledRegistrationForm, StyledTextLabel, StyledInputTextType, StyledButton, StyledErrorMessage, StyledLink, StyledRegisteredOption} from './login.styles';
 import { useAppDispatch, useAppSelector } from '../../store/store';
-import { createUserAction } from "../../store/actions/users"
-
+import {getAuthAction, loginUserAction, logoutUserAction} from "../../store/actions/auth"
 import * as i from "../../interfaces/interfaces";
+import {useNavigate} from "react-router-dom";
+import {getUsersAction} from "../../store/actions/users";
 
 
 export const Login: React.FC = () => {
     const dispatch = useAppDispatch();
-    const { handleSubmit, register, formState, reset,  } = useForm<i.Interfaces.UserRegistrationData>({ mode: "onChange" });
+    const navigate = useNavigate();
+    const { handleSubmit, register, formState, reset,  } = useForm<i.Interfaces.UserLoginData>({ mode: "onChange" });
 
-    const onSubmit = useCallback(( data: i.Interfaces.UserRegistrationData ) => {
+    const { status, getAuthStatus, isAdmin, user, isReviewer, error } = useAppSelector((store) => store.auth);
+
+    const onSubmit = useCallback((data: i.Interfaces.UserLoginData) => {
         reset();
-        dispatch(createUserAction({...data}));
-    }, [dispatch, reset]);
+        dispatch(getUsersAction());
+        dispatch(loginUserAction({...data})).then(() => {
+            navigate("/");
+        })
+    }, [dispatch, reset, navigate]);
+
+    // const onSubmit = useCallback(( data: i.Interfaces.UserLoginData ) => {
+    //     dispatch(loginUserAction(data));
+    // }, [dispatch, ]);
 
     return (
         <StyledRegistrationForm onSubmit={handleSubmit(onSubmit)}>
-            <StyledTextLabel htmlFor="login">Sign in to Reviewfy</StyledTextLabel>
-            <StyledInputTextType type="text" id="login" placeholder="Login"
-                                 {...register('login', {
+            <StyledTextLabel htmlFor="email">Sign in to Reviewfy</StyledTextLabel>
+            <StyledInputTextType type="text" id="email" placeholder="Email"
+                                 {...register('email', {
                                      required: true,
-                                     minLength: {
-                                         value: 10,
-                                         message: "Login should contain at least 10 symbols"
-                                     },
-                                     pattern: {
-                                         value: /([A-z]|\d)*/,
-                                         message: "Login should contain only letters or numbers"
-                                     },
-                                     maxLength: {
-                                         value: 30,
-                                         message: "Login should contain no more than 30 symbols"
-                                     }
+                                     pattern: { value: /(^[\w\-.]+@([\w-]+\.)+[\w-]{2,4}$)/, message: "Enter valid e-mail" }
                                  })}/>
-            {formState.errors.login && <StyledErrorMessage>{formState.errors.login.message}</StyledErrorMessage>}
+            {formState.errors.email && <StyledErrorMessage>{formState.errors.email.message}</StyledErrorMessage>}
             <StyledInputTextType type="password" id="password" placeholder="Password"
                                  {...register('password', {
                                      required: true,

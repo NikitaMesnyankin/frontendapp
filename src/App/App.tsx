@@ -5,10 +5,9 @@ import { Users } from '../pages/users/users';
 import { Main } from "../pages/main/main"
 import { Navbar } from "../pages/navbar/navbar";
 import { Registration } from "../pages/registration/registration"
-import {Login} from "../pages/login/login";
+import { Login } from "../pages/login/login";
 
 export const App: React.FC = () => {
-
     return (
         <AppWrapper>
                 <Navbar/>

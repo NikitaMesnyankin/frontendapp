@@ -1,7 +1,6 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import { getUsers, createUser } from '../../api/users';
-import {Interfaces} from "../../interfaces/interfaces";
-import UserRegistrationData = Interfaces.UserRegistrationData;
+import * as i from "../../interfaces/interfaces";
 
 export const getUsersAction = createAsyncThunk(
     "/getUsers",
@@ -10,5 +9,5 @@ export const getUsersAction = createAsyncThunk(
 
 export const createUserAction = createAsyncThunk(
     "/postUsers",
-    async (data: UserRegistrationData) => await createUser(data),
+    async (data: i.Interfaces.UserRegistrationData) => await createUser(data),
 );

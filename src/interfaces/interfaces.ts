@@ -5,6 +5,7 @@ export namespace Interfaces {
         password: string;
         email: string;
         isActivated?: boolean;
+        role?: Enums.Roles;
         activationLink?: string;
         nickname?: string;
         rating?: number;
@@ -56,6 +57,11 @@ export namespace Interfaces {
     }
 
     export type UserLoginData = Exclude<UserRegistrationData, "login">;
+
+    export type AsyncState = {
+        status: Enums.FetchStatus;
+        error?: unknown;
+    };
 }
 
 export namespace Enums {
@@ -64,5 +70,11 @@ export namespace Enums {
         FETCHED = 'FETCHED',
         ERROR = 'ERROR',
         INITIAL = 'INITIAL',
+    }
+
+    export enum Roles {
+        USER = "USER",
+        ADMIN = "ADMIN",
+        REVIEWER = "REVIEWER",
     }
 }
