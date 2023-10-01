@@ -10,10 +10,10 @@ export const StyledRegistrationForm = styled.form`
   align-items: center;
 `
 
-export const StyledTextLabel = styled.label`
+export const StyledTextLabel = styled.label<{ fontSize?: string}>`
   font-family: "Trebuchet MS", system-ui;
   color: navy;
-  font-size: x-large;
+  font-size: ${({ fontSize }) => fontSize ?? "x-large"};
   margin-top: 1%;
   margin-bottom: 1%;
 `
@@ -25,6 +25,19 @@ export const StyledInputTextType = styled.input`
   border:1px solid black;
   border-radius: 3px;
   background-image: linear-gradient(#FAFAFA, #F1F1F1);
+`
+
+export const StyledSelector = styled.select`
+  margin-top: 1%;
+  width: 25%;
+  text-align: center;
+  border:1px solid black;
+  border-radius: 3px;
+  background-image: linear-gradient(#FAFAFA, #F1F1F1);
+  
+  :invalid {
+    color: gray;
+  }
 `
 
 export const StyledButton = styled.button<{ width?: number, height?: number, marginTop?: number, marginBottom?: number }>`

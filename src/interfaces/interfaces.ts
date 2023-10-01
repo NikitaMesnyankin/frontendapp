@@ -12,6 +12,7 @@ export namespace Interfaces {
         about?: string | null;
         createdAt?: string;
         modifiedAt?: string;
+        reviews?: Review[];
     }
 
     export interface Film {
@@ -26,14 +27,15 @@ export namespace Interfaces {
     }
 
     export interface Review {
-        id: number;
+        id?: number;
         authorId: number;
         filmId: number;
         content: string | null;
         score: number;
-        karma: number;
-        createdAt: string;
-        modifiedAt: string;
+        karma?: number;
+        createdAt?: string;
+        modifiedAt?: string;
+        isValidated?: boolean;
     }
 
     export enum Countries {
@@ -62,6 +64,14 @@ export namespace Interfaces {
         status: Enums.FetchStatus;
         error?: unknown;
     };
+
+    export const ReviewColorsMapping: Record<string, string> = {
+        "5": "purple",
+        "4": "green",
+        "3": "yellow",
+        "2": "red",
+        "1": "black"
+    }
 }
 
 export namespace Enums {

@@ -1,12 +1,11 @@
-import React, { useCallback, useState }  from "react";
+import React, { useCallback }  from "react";
 import { useForm } from "react-hook-form";
 
 import {StyledRegistrationForm, StyledTextLabel, StyledInputTextType, StyledButton, StyledErrorMessage, StyledLink, StyledRegisteredOption} from './login.styles';
-import { useAppDispatch, useAppSelector } from '../../store/store';
-import {getAuthAction, loginUserAction, logoutUserAction} from "../../store/actions/auth"
+import { useAppDispatch } from '../../store/store';
+import {getAuthAction, loginUserAction} from "../../store/actions/auth"
 import * as i from "../../interfaces/interfaces";
 import {useNavigate} from "react-router-dom";
-import {getUsersAction} from "../../store/actions/users";
 
 
 export const Login: React.FC = () => {
@@ -14,19 +13,12 @@ export const Login: React.FC = () => {
     const navigate = useNavigate();
     const { handleSubmit, register, formState, reset,  } = useForm<i.Interfaces.UserLoginData>({ mode: "onChange" });
 
-    const { status, getAuthStatus, isAdmin, user, isReviewer, error } = useAppSelector((store) => store.auth);
-
     const onSubmit = useCallback((data: i.Interfaces.UserLoginData) => {
         reset();
-        dispatch(getUsersAction());
-        dispatch(loginUserAction({...data})).then(() => {
+        dispatch(loginUserAction({...data})).then(() => dispatch(getAuthAction())).then(() => {
             navigate("/");
         })
     }, [dispatch, reset, navigate]);
-
-    // const onSubmit = useCallback(( data: i.Interfaces.UserLoginData ) => {
-    //     dispatch(loginUserAction(data));
-    // }, [dispatch, ]);
 
     return (
         <StyledRegistrationForm onSubmit={handleSubmit(onSubmit)}>

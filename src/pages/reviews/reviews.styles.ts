@@ -9,7 +9,7 @@ export const StyledMain = styled.div`
     overflow-y: hidden;
 `;
 
-export const StyledUsersHeader = styled.div`
+export const StyledReviewsHeader = styled.div`
   text-align: center;
   width: 100%;
   margin-top: 1%;
@@ -21,14 +21,14 @@ export const StyledUsersHeader = styled.div`
   align-items: center;
 `
 
-export const StyledUsersTopText = styled.span`
+export const StyledReviewsTopText = styled.span`
   text-shadow: 1px 1px 2px black;
   vertical-align: middle;
   font-size: large;
   font-family: "Lucida Sans", serif;
 `
 
-export const StyledUserDescriptionSpan = styled.span`
+export const StyledReviewDescriptionSpan = styled.span`
   padding-top: 1.5vh;
   width: 100%;
   justify-self: center;
@@ -36,7 +36,7 @@ export const StyledUserDescriptionSpan = styled.span`
   text-align: center;
 `
 
-export const StyledUserTableContainer = styled.table`
+export const StyledReviewTableContainer = styled.table`
   width: 80%;
   table-layout: fixed;
   margin-bottom: 20px;
@@ -68,21 +68,22 @@ export const StyledText = styled.text<{ passedColor: string }>`
     color: ${({ passedColor }) => passedColor || "black"};
 `;
 
-export const StyledUserContainer = styled.div`
+export const StyledReviewContainer = styled.div`
     background: #e5f1dd;
     width: 80%;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center;
-    font-size: 1.25vh;
+    //font-size: 1.25vh;
     border-radius: 10px;
     border: 1.5px solid #5f9ea0;
     margin: 10px 10px 10px 10px;
 `;
 
-export const StyledUserFieldSpan = styled.span<{ color: string; fontSize: string; width: number }>`
-  font-size: medium;
+export const StyledReviewFieldSpan = styled.span<{ color: string; fontSize: string; width: number }>`
+  //font-size: medium;
+  font-size: ${({ fontSize }) => fontSize};
   font-weight: bold;
   color: ${({ color }) => color};
   width: ${({ width }) => `${width}%`};

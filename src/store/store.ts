@@ -1,18 +1,22 @@
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux';
 import { AnyAction, CombinedState, combineReducers, configureStore, ThunkDispatch } from '@reduxjs/toolkit';
-import { persistStore } from 'redux-persist';
+import { persistStore, persistReducer } from 'redux-persist';
 import { usersReducer as users } from './reducers/users';
 import { authReducer as auth } from './reducers/auth';
-//import storage from 'redux-persist/lib/storage'
+import { reviewsReducer as reviews } from "./reducers/reviews"
+import { filmsReducer as films } from "./reducers/films"
+import storage from 'redux-persist/lib/storage'
 
-// export const persistedAuthReducer = persistReducer({
-//     key: "root",
-//     storage
-// }, auth);
+export const persistedAuthReducer = persistReducer({
+    key: "root",
+    storage
+}, auth);
 
 const reducer = combineReducers({
-    auth,
+    persistedAuthReducer,
     users,
+    reviews,
+    films,
 });
 
 export const store = configureStore({
