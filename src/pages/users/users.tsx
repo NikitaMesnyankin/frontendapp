@@ -10,15 +10,10 @@ import {
 } from './users.styles';
 import { useAppDispatch, useAppSelector } from '../../store/store';
 import * as i from "../../interfaces/interfaces"
-
-//import { useNavigate } from 'react-router-dom';
 import { getUsersAction } from "../../store/actions/users";
 
 export const Users: React.FC = () => {
     const dispatch = useAppDispatch();
-
-    //const navigate = useNavigate();
-
     const { users, getUsersStatus } = useAppSelector((store) => store.users);
 
     useEffect(() => {
@@ -26,8 +21,6 @@ export const Users: React.FC = () => {
             dispatch(getUsersAction());
         }
     }, [dispatch, getUsersStatus])
-
-    //const handleNavigateClick = useCallback(() => navigate(`/`), [navigate]);
 
     return (
         <StyledMain>
